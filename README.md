@@ -12,9 +12,6 @@ En ella se representan diversos videojuegos, con los personajes que salen en ell
 ## Modelo de datos
 ![Data Model](img/data-model.png)
 
-## Instancia de la base de datos
-![Database Instance](img/db-instance.png)
-
 ### Nodos
 ```
 x(compañía) -> Nombre_comp; Fecha de fundación; Lugar de creación;
@@ -34,6 +31,9 @@ p(genero) -> Nombre_gen;
 6 – y(videojuego) -es_secuela_de-> y(videojuego)
 7 – x(compañía) -creó {fecha_comienzo_creación:}-> t(consola)
 ```
+
+## Instancia de la base de datos
+![Database Instance](img/db-instance.png)
 
 ### Explicación de la instancia:
 Tenemos 5 compañías: Nintendo, SEGA, Level 5, Eelectronic Arts (EA) y Midway
