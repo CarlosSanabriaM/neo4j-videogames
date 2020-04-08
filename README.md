@@ -4,6 +4,13 @@
 * Carlos Sanabria Miranda ([@CarlosSanabriaM](https://github.com/CarlosSanabriaM))
 * Lucía Méndez López ([@UO250970](https://github.com/UO250970))
 
+## GraphGist
+En este [GraphGist](https://portal.graphgist.org/graph_gist_candidates/fe3da5d4-bc13-45cc-a36d-aadbd4fb0107) se puede probar de forma interactiva esta base de datos, con las diversas querys que se han implementado, así como querys introducidas por el usuario.
+
+[Código fuente del GraphGist](graph-gist.txt).
+
+[Más información sobre los GraphGists](https://neo4j.com/graphgists/).
+
 ## Dominio de aplicación
 La temática de esta base de datos modelada mediante un grafo son los videojuegos.
 
