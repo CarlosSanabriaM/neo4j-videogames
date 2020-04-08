@@ -12,7 +12,7 @@ En ella se representan diversos videojuegos, con los personajes que salen en ell
 
 
 == Modelo de datos
-image::https://github.com/CarlosSanabriaM/neo4j-videogames/blob/master/img/data-model.png[width=700]
+image::https://github.com/CarlosSanabriaM/neo4j-videogames/blob/master/img/data-model.jpeg[width=700]
 
 
 == Instancia de la base de datos

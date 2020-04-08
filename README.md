@@ -17,7 +17,7 @@ La temática de esta base de datos modelada mediante un grafo son los videojuego
 En ella se representan diversos videojuegos, con los personajes que salen en ellos, las compañías que los desarrollaron, el género al que pertenecen y las consolas para las que salen.
 
 ## Modelo de datos
-![Data Model](img/data-model.png)
+![Data Model](img/data-model.jpeg)
 
 ### Nodos
 ```
