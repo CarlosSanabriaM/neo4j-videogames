@@ -57,7 +57,7 @@ Los 5 se pueden ejecutar con la NintendoDS.
 Los Super Mario Bros son juegos de plataformas, que se pueden ejecutar con la NES.
 
 ## Script de creación de la base de datos
-[db-creation-script.txt](db-creation-script.txt)
+[db-creation-script.sql](db-creation-script.sql)
 
 ## Querys de ejemplo
-[querys.txt](querys.md)
+[querys.md](querys.md)
