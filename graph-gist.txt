@@ -1,0 +1,284 @@
+= Neo4j Videojuegos
+
+== Desarrolladores
+* Carlos Sanabria Miranda (https://github.com/CarlosSanabriaM[@CarlosSanabriaM])
+* Lucía Méndez López (https://github.com/UO250970[@UO250970])
+
+
+== Dominio de aplicación
+La temática de esta base de datos modelada mediante un grafo son los videojuegos.
+
+En ella se representan diversos videojuegos, con los personajes que salen en ellos, las compañías que los desarrollaron, el género al que pertenecen y las consolas para las que salen.
+
+
+== Modelo de datos
+image::https://github.com/CarlosSanabriaM/neo4j-videogames/blob/master/img/data-model.png[width=700]
+
+
+== Instancia de la base de datos
+image::https://github.com/CarlosSanabriaM/neo4j-videogames/blob/master/img/db-instance.png[width=700]
+
+=== Explicación de la instancia
+Tenemos 5 compañías: Nintendo, SEGA, Level 5, Eelectronic Arts (EA) y Midway
+
+De Nintendo tenemos 3 de las consolas que ha creado (Nintendo3DS, NintendoDS y NES), así como varios juegos que ha desarrollado (entre ellos "SuperMarioBros" y "SuperMarioBros 2", siendo este último una secuela del primero).
+
+Nintendo ha colaborado con SEGA para desarrollar el videojuego "Mario y Sonic en los juegos Olímpicos", cuyos personajes son Mario (que tambien es personaje de los dos "Super Mario Bros") y Sonic.
+
+SEGA ha creado la Mega Drive. Esta es capaz de ejecutar el videojuego "Mortal Kombat", desarrolado por Midway. Es un juego de lucha, donde uno de los personajes es "Sub-Zero".
+
+Level 5, EA y Midway no han creado ninguna consola.
+
+SEGA colaboró con Nintendo en el desarrollo de los 3 Profesor Layton, siendo "El futuro perdido" secuela directa de "La caja de pandora", y este último secuela directa de "La villa misteriosa".
+
+EA colaboró con Nintendo y SEGA, en el 2002 y el 2000 respectivamente. Aparte, desarrolló el "FIFA 18".
+
+"Mario y Sonic en los JJOO" y "FIFA 18" son un juego de deportes, y los Layton son juegos de puzzles.
+
+Los 5 se pueden ejecutar con la NintendoDS.
+
+Los Super Mario Bros son juegos de plataformas, que se pueden ejecutar con la NES.
+
+
+== Consola
+//console
+
+
+== Creación de los nodos y las relaciones
+//hide
+//setup
+//output
+[source,cypher]
+----
+CREATE (Nintendo:Compañia {nombre_comp:'Nintendo',fecha_fundacion:1889,lugar_creacion:'Japón'})
+CREATE (SEGA:Compañia{nombre_comp:'SEGA',fecha_fundacion:1960,lugar_creacion:'Japón'})
+CREATE (Level5:Compañia{nombre_comp:'Level 5',fecha_fundacion:1998,lugar_creacion:'Japón'})
+CREATE (EA:Compañia{nombre_comp:'Electronic Arts',fecha_fundacion:1982,lugar_creacion:'Estados Unidos'})
+CREATE (Midway:Compañia{nombre_comp:'Midway',fecha_fundacion:1958,lugar_creacion:'Estados Unidos'})
+CREATE (NES:Consola {nombre_cons:'NES',fecha_creacion:1983,tipo:'sobremesa'})
+CREATE (NintendoDS:Consola {nombre_cons:'Nintendo DS',fecha_creacion:2004,tipo:'portatil'})
+CREATE (Nintendo3DS:Consola {nombre_cons:'Nintendo 3DS',fecha_creacion:2011,tipo:'portatil'})
+CREATE (MegaDrive:Consola {nombre_cons:'Mega Drive',fecha_creacion:1988,tipo:'sobremesa'})
+CREATE (SuperMarioBros:Videojuego {nombre_vid:'Super Mario Bros.',fecha_lanzamiento:1985})
+CREATE (SuperMarioBros2:Videojuego {nombre_vid:'Super Mario Bros. 2', fecha_lanzamiento:1988})
+CREATE (MarioYSonicJJOO:Videojuego {nombre_vid:'Mario & Sonic en los Juegos Olímpicos',fecha_lanzamiento:2008})
+CREATE (LaytonVillaMisteriosa:Videojuego {nombre_vid:'El profesor Layton y la villa misteriosa',fecha_lanzamiento:2007})
+CREATE (LaytonCajaPandora:Videojuego {nombre_vid:'El profesor Layton y la caja de Pandora',fecha_lanzamiento:2007})
+CREATE (LaytonFuturoPerdido:Videojuego {nombre_vid:'El profesor Layton y el futuro perdido',fecha_lanzamiento:2008})
+CREATE (MortalKombat:Videojuego {nombre_vid:'Mortal Kombat',fecha_lanzamiento:1992})
+CREATE (FIFA08:Videojuego {nombre_vid:'FIFA 08',fecha_lanzamiento:2007})
+CREATE (Mario:Personaje {nombre_pers:'Mario',sexo:'Masculino'})
+CREATE (Peach:Personaje {nombre_pers:'Peach',sexo:'Femenino'})
+CREATE (Sonic:Personaje {nombre_pers:'Sonic',sexo:'Masculino'})
+CREATE (Layton:Personaje {nombre_pers:'Profesor Layton',sexo:'Masculino'})
+CREATE (Luke:Personaje {nombre_pers:'Luke Triton',sexo:'Masculino'})
+CREATE (Dimitri:Personaje {nombre_pers:'Dimitri Allen',sexo:'Masculino'} )
+CREATE (SubZero:Personaje {nombre_pers:'Sub-Zero',sexo:'Masculino'} )
+CREATE (Plataformas:Genero {nombre_gen:'Plataformas'})
+CREATE (Deportes:Genero {nombre_gen:'Deportes'})
+CREATE (Puzzles:Genero {nombre_gen:'Puzzles'})
+CREATE (Lucha:Genero {nombre_gen:'Lucha'})
+
+CREATE
+(Nintendo)-[:COLABORÓ_CON {fecha_col:[2006]}]->(SEGA),
+(SEGA)-[:COLABORÓ_CON {fecha_col:[2006]}]->(Nintendo),
+(Nintendo)-[:COLABORÓ_CON {fecha_col:[2005,2005,2006]}]->(Level5),
+(Level5)-[:COLABORÓ_CON {fecha_col:[2005,2005,2006]}]->(Nintendo),
+(SEGA)-[:COLABORÓ_CON {fecha_col:[2000]}]->(EA),
+(EA)-[:COLABORÓ_CON {fecha_col:[2000]}]->(SEGA),
+(EA)-[:COLABORÓ_CON {fecha_col:[2002]}]->(Nintendo),
+(Nintendo)-[:COLABORÓ_CON {fecha_col:[2002]}]->(EA),
+(Nintendo)-[:DESARROLLÓ {fecha_comienzo_desarrollo:2005}]->(LaytonCajaPandora),
+(Level5)-[:DESARROLLÓ {fecha_comienzo_desarrollo:2005}]->(LaytonCajaPandora),
+(Nintendo)-[:DESARROLLÓ {fecha_comienzo_desarrollo:2005}]->(LaytonVillaMisteriosa),
+(Level5)-[:DESARROLLÓ {fecha_comienzo_desarrollo:2005}]->(LaytonVillaMisteriosa),
+(Nintendo)-[:DESARROLLÓ {fecha_comienzo_desarrollo:2006}]->(LaytonFuturoPerdido),
+(Level5)-[:DESARROLLÓ {fecha_comienzo_desarrollo:2006}]->(LaytonFuturoPerdido),
+(Nintendo)-[:DESARROLLÓ {fecha_comienzo_desarrollo:2006}]->(MarioYSonicJJOO),
+(SEGA)-[:DESARROLLÓ {fecha_comienzo_desarrollo:2006}]->(MarioYSonicJJOO),
+(Nintendo)-[:DESARROLLÓ {fecha_comienzo_desarrollo:1983}]->(SuperMarioBros),
+(Nintendo)-[:DESARROLLÓ {fecha_comienzo_desarrollo:1985}]->(SuperMarioBros2),
+(EA)-[:DESARROLLÓ]->(FIFA08),
+(Midway)-[:DESARROLLÓ {fecha_comienzo_desarrollo:1989}]->(MortalKombat),
+(Nintendo)-[:CREÓ {fecha_comienzo_creación:1980}]->(NES),
+(Nintendo)-[:CREÓ {fecha_comienzo_creación:2003}]->(NintendoDS),
+(Nintendo)-[:CREÓ {fecha_comienzo_creación:2011}]->(Nintendo3DS),
+(SEGA)-[:CREÓ {fecha_comienzo_creación:1983}]->(MegaDrive),
+(LaytonVillaMisteriosa)-[:TIENE]->(Layton),
+(LaytonVillaMisteriosa)-[:TIENE]->(Luke),
+(LaytonVillaMisteriosa)-[:ES_DE_GENERO]->(Puzzles),
+(LaytonCajaPandora)-[:ES_SECUELA_DE]->(LaytonVillaMisteriosa),
+(LaytonCajaPandora)-[:TIENE]->(Layton),
+(LaytonCajaPandora)-[:TIENE]->(Luke),
+(LaytonCajaPandora)-[:ES_DE_GENERO]->(Puzzles),
+(LaytonFuturoPerdido)-[:ES_SECUELA_DE]->(LaytonCajaPandora),
+(LaytonFuturoPerdido)-[:TIENE]->(Layton),
+(LaytonFuturoPerdido)-[:TIENE]->(Luke),
+(LaytonFuturoPerdido)-[:TIENE]->(Dimitri),
+(LaytonFuturoPerdido)-[:ES_DE_GENERO]->(Puzzles),
+(NintendoDS)-[:PUEDE_EJECUTAR]->(LaytonVillaMisteriosa),
+(NintendoDS)-[:PUEDE_EJECUTAR]->(LaytonCajaPandora),
+(NintendoDS)-[:PUEDE_EJECUTAR]->(LaytonFuturoPerdido),
+(NintendoDS)-[:PUEDE_EJECUTAR]->(MarioYSonicJJOO),
+(NintendoDS)-[:PUEDE_EJECUTAR]->(FIFA08),
+(MegaDrive)-[:PUEDE_EJECUTAR]->(MortalKombat),
+(MarioYSonicJJOO)-[:TIENE]->(Sonic),
+(MarioYSonicJJOO)-[:TIENE]->(Mario),
+(MarioYSonicJJOO)-[:TIENE]->(Peach),
+(MarioYSonicJJOO)-[:ES_DE_GENERO]->(Deportes),
+(FIFA08)-[:ES_DE_GENERO]->(Deportes),
+(NES)-[:PUEDE_EJECUTAR]->(SuperMarioBros),
+(NES)-[:PUEDE_EJECUTAR]->(SuperMarioBros2),
+(SuperMarioBros)-[:TIENE]->(Mario),
+(SuperMarioBros)-[:TIENE]->(Peach),
+(SuperMarioBros)-[:ES_DE_GENERO]->(Plataformas),
+(SuperMarioBros2)-[:ES_SECUELA_DE]->(SuperMarioBros),
+(SuperMarioBros2)-[:TIENE]->(Mario),
+(SuperMarioBros2)-[:TIENE]->(Peach),
+(MortalKombat)-[:TIENE]->(SubZero),
+(SuperMarioBros2)-[:ES_DE_GENERO]->(Plataformas),
+(MortalKombat)-[:ES_DE_GENERO]->(Lucha)
+----
+
+//graph
+
+
+== Querys dificultad básica
+
+=== Nombre de videojuegos, junto a su fecha de lanzamiento, ordenados por fecha de lanzamiento
+(Ordenados por fecha de lanzamiento)
+[source,cypher]
+----
+MATCH (n:Videojuego)
+RETURN n.nombre_vid AS NombreVideojuego ,n.fecha_lanzamiento AS FechaLanzamiento
+ORDER BY n.fecha_lanzamiento
+----
+//table
+
+
+=== Nombre de los personajes que salen en videojuegos desarrollados por SEGA
+[source,cypher]
+----
+MATCH (p:Personaje)<-[:TIENE]-(v:Videojuego)<-[:DESARROLLÓ]-(c:Compañia)
+WHERE c.nombre_comp="SEGA"
+RETURN DISTINCT p.nombre_pers AS NombrePersonaje
+----
+//table
+
+
+=== Nombre de una consola junto al numero de videojuegos que puede ejecutar
+[source,cypher]
+----
+MATCH (c:Consola)-[ej:PUEDE_EJECUTAR]->(v:Videojuego)
+RETURN c.nombre_cons AS NombreConsola, COUNT(*) AS NumeroDeJuegos
+----
+//table
+
+
+=== Numero de compañias que desarrollaron los videojuegos
+[source,cypher]
+----
+MATCH (v:Videojuego) <-[d:DESARROLLÓ]-(c:Compañia)
+RETURN v.nombre_vid AS NombreVideojuego, COUNT(c) AS NumeroCompañiasQueLoDesarrollaron
+----
+//table
+
+
+
+== Querys dificultad intermedia
+
+=== Personajes que no salen en juegos de NES
+[source,cypher]
+----
+MATCH (p:Personaje),(c:Consola)
+WHERE c.nombre_cons="NES"
+AND NOT (p)<-[:TIENE]-(:Videojuego)<-[:PUEDE_EJECUTAR]-(c)
+RETURN p AS Personajes
+----
+//table
+
+//graph_result
+
+
+=== Videojuegos que surgen de las colaboraciones entre compañias que colaboraron mas de 2 veces
+[source,cypher]
+----
+MATCH (c1:Compañia)-[:DESARROLLÓ]->(v:Videojuego)<-[:DESARROLLÓ]-(c2:Compañia),
+(c1)-[colab:COLABORÓ_CON]-(c2)
+WHERE size(colab.fecha_col) > 2
+RETURN DISTINCT v AS Videojuegos
+----
+//table
+
+//graph_result
+
+
+=== Videojuegos para consolas portátiles, que han sido desarrollados por los creadores de dicha consola portátil
+
+Se muestra el videojuego junto a la consola portátil donde se ejecuta y la compañía que crea/desarrolla ambos.
+
+[source,cypher]
+----
+MATCH (comp:Compañia)-[:DESARROLLÓ]->(v:Videojuego),
+(v)<-[:PUEDE_EJECUTAR]-(c:Consola)<-[:CREÓ]-(comp)
+WHERE c.tipo="portatil"
+RETURN v AS Videojuegos ,c AS Consolas ,comp AS Compañias
+----
+//table
+
+//graph_result
+
+*Explicación:* La relación colaboró_con tiene un atributo fecha_col, que es una lista, que guarda los años en los que colaboran las dos compañías de la relación para cada uno de los juegos que hicieron juntas.
+
+
+=== Videojuegos para consolas portátiles, que han sido desarrollados por los creadores de dicha consola portátil
+
+Se muestra el videojuego junto a la consola portátil donde se ejecuta y la compañía que crea/desarrolla ambos.
+
+[source,cypher]
+----
+MATCH (comp:Compañia)-[:DESARROLLÓ]->(v:Videojuego),
+(v)<-[:PUEDE_EJECUTAR]-(c:Consola)<-[:CREÓ]-(comp)
+WHERE c.tipo="portatil"
+RETURN v AS Videojuegos ,c AS Consolas ,comp AS Compañias
+----
+//table
+
+//graph_result
+
+
+=== Número de consolas en las que sale el personaje Mario y una lista con los nombres de esas consolas
+[source,cypher]
+----
+MATCH (c:Consola)-[p:PUEDE_EJECUTAR]->(v:Videojuego)-[t:TIENE]->(per:Personaje)
+WHERE per.nombre_pers = 'Mario'
+RETURN count(c) AS Cantidad ,collect(c.nombre_cons) AS Consolas
+----
+//table
+
+
+
+
+== Querys dificultad avanzada
+
+=== Juegos que son precuela (directa o indirecta) de Layton y el futuro perdido
+[source,cypher]
+----
+MATCH (v1:Videojuego)-[:ES_SECUELA_DE*]->(v2:Videojuego)
+WHERE v1.nombre_vid="El profesor Layton y el futuro perdido"
+RETURN v2 AS Videojuegos
+----
+//table
+
+//graph_result
+
+
+=== Camino mínimo de colaboraciones entre SEGA y Level5
+[source,cypher]
+----
+MATCH (c1:Compañia { nombre_comp: 'SEGA' }), (c2:Compañia { nombre_comp:'Level 5' } ), p = shortestPath((c1) – [:COLABORÓ_CON*] – (c2))
+RETURN p
+----
+//table
+
+//graph_result

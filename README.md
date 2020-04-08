@@ -4,7 +4,7 @@
 * Carlos Sanabria Miranda ([@CarlosSanabriaM](https://github.com/CarlosSanabriaM))
 * Lucía Méndez López ([@UO250970](https://github.com/UO250970))
 
-## Dominio de aplicación:
+## Dominio de aplicación
 La temática de esta base de datos modelada mediante un grafo son los videojuegos.
 
 En ella se representan diversos videojuegos, con los personajes que salen en ellos, las compañías que los desarrollaron, el género al que pertenecen y las consolas para las que salen.

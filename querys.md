@@ -1,5 +1,5 @@
 # Querys
-## Consultas elementales
+## Querys dificultad básica
 
 ### Nombre de videojuegos, junto a su fecha de lanzamiento, ordenados por fecha de lanzamiento
 ```sql
@@ -51,7 +51,10 @@ RETURN DISTINCT v AS Videojuegos
 __Explicación:__ La relación colaboró_con tiene un atributo fecha_col, que es una lista, que
 guarda los años en los que colaboran las dos compañías de la relación para cada uno de los juegos que hicieron juntas.
 
-### Videojuegos para consolas portátiles, que han sido desarrollados por los creadores de dicha consola portátil (se muestra el videojuego junto a la consola portátil donde se ejecuta y la compañía que crea/desarrolla ambos)
+### Videojuegos para consolas portátiles, que han sido desarrollados por los creadores de dicha consola portátil
+
+Se muestra el videojuego junto a la consola portátil donde se ejecuta y la compañía que crea/desarrolla ambos.
+
 ```sql
 MATCH (comp:Compañia)-[:DESARROLLÓ]->(v:Videojuego),
 (v)<-[:PUEDE_EJECUTAR]-(c:Consola)<-[:CREÓ]-(comp)
