@@ -5,18 +5,12 @@
 * Lucía Méndez López (https://github.com/UO250970[@UO250970])
 
 
-== Dominio de aplicación
-La temática de esta base de datos modelada mediante un grafo son los videojuegos.
-
-En ella se representan diversos videojuegos, con los personajes que salen en ellos, las compañías que los desarrollaron, el género al que pertenecen y las consolas para las que salen.
-
-
 == Modelo de datos
-image::https://github.com/CarlosSanabriaM/neo4j-videogames/blob/master/img/data-model.jpeg[width=700]
+image::https://raw.githubusercontent.com/CarlosSanabriaM/neo4j-videogames/master/img/data-model.jpeg[width=700]
 
 
 == Instancia de la base de datos
-image::https://github.com/CarlosSanabriaM/neo4j-videogames/blob/master/img/db-instance.png[width=700]
+image::https://raw.githubusercontent.com/CarlosSanabriaM/neo4j-videogames/master/img/db-instance.png[width=700]
 
 === Explicación de la instancia
 Tenemos 5 compañías: Nintendo, SEGA, Level 5, Eelectronic Arts (EA) y Midway
