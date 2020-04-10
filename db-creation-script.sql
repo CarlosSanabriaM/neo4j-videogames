@@ -29,13 +29,9 @@ CREATE (Lucha:Genero {nombre_gen:'Lucha'})
 
 CREATE
 	(Nintendo)-[:COLABORÓ_CON {fecha_col:[2006]}]->(SEGA),
-	(SEGA)-[:COLABORÓ_CON {fecha_col:[2006]}]->(Nintendo) ,
 	(Nintendo)-[:COLABORÓ_CON {fecha_col:[2005,2005,2006]}]->(Level5),
-	(Level5)-[:COLABORÓ_CON {fecha_col:[2005,2005,2006]}]->(Nintendo),
 	(SEGA)-[:COLABORÓ_CON {fecha_col:[2000]}]->(EA),
-	(EA)-[:COLABORÓ_CON {fecha_col:[2000]}]->(SEGA),
 	(EA)-[:COLABORÓ_CON {fecha_col:[2002]}]->(Nintendo),
-	(Nintendo)-[:COLABORÓ_CON {fecha_col:[2002]}]->(EA),
 	(Nintendo)-[:DESARROLLÓ {fecha_comienzo_desarrollo:2005}]->(LaytonCajaPandora),
 	(Level5)-[:DESARROLLÓ {fecha_comienzo_desarrollo:2005}]->(LaytonCajaPandora),
 	(Nintendo)-[:DESARROLLÓ {fecha_comienzo_desarrollo:2005}]->(LaytonVillaMisteriosa),
